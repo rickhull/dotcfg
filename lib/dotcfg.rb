@@ -53,22 +53,23 @@ class DotCfg
     File.exists?(@filename) ? self.load : self.reset
   end
 
-
-  # manipulate @storage
   #
+  # @storage manipulation
+  #
+
   def [] key
     key = self.class.normalize key
     @storage[key] or @storage[key.to_s]
   end
-  #
+
   def []= key, value
     @storage[self.class.normalize(key)] = value
   end
-  #
+
   def delete key
     @storage.delete(self.class.normalize(key))
   end
-  #
+
   def method_missing key, *args
     if key[-1,1] == '='
       self[key[0, key.length - 1]] = args.first
@@ -76,41 +77,39 @@ class DotCfg
       self[key]
     end
   end
-  #
+
   def respond_to? key, *args
     true
   end
-  #
-  # end simple @storage manipulation
 
-
-  # serialization, based on PROCS
   #
+  # serialization, using PROCS
+  #
+
   def serialize
     raise "invalid storage" unless @storage.is_a? Hash
     self.class::PROCS.fetch(@format)[:to].call @storage
   end
-  #
+
   def deserialize junk
     data = self.class::PROCS.fetch(@format)[:from].call junk
     raise "invalid junk: #{junk} (#{junk.class})" unless data.is_a? Hash
     data.each { |k, v| self[k] = v }
     @storage
   end
-  #
+
   def dump
     self.class::PROCS.fetch(@format)[:pretty].call @storage
   end
+
   #
-  # end serialization
-
-
   # file operations
   #
+
   def save
     File.open(@filename, 'w') { |f| f.write self.serialize }
   end
-  #
+
   def load
     rescues = 0
     begin
@@ -127,12 +126,9 @@ class DotCfg
       raise e
     end
   end
-  #
+
   def reset
     @storage = DEFAULT.dup
     save
   end
-  #
-  # end file operations
-
 end
