@@ -20,7 +20,7 @@ class DotCfg
   def self.normalize key
     case key
     when Numeric, Symbol
-      key
+      key                # pass thru
     when String
       # leading numerics are invalid
       raise "invalid key: #{key}" if key[0,1] == '0' or key[0,1].to_i != 0
@@ -50,6 +50,7 @@ class DotCfg
   def initialize filename, format = :json
     @filename = File.expand_path filename
     @format = format
+    @storage = {}
     File.exists?(@filename) ? self.load : self.reset
   end
 
@@ -113,8 +114,8 @@ class DotCfg
   def load
     rescues = 0
     begin
-      File.open(@filename, 'r') { |f| @storage = self.deserialize f.read }
-    rescue Exception => e
+      File.open(@filename, 'r') { |f| self.deserialize f.read }
+    rescue SystemCallError => e
       rescues += 1
       puts  "#{e} (#{e.class})"
       if rescues < 2
