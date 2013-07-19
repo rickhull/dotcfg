@@ -4,16 +4,15 @@ require 'yaml'
 # uses JSON or YAML for serialization
 # top-level structure is object/hash/dict
 #
-# provide and prefer method-based access to str/sym/etc keys
 # e.g.
 # d = DotCfg.new('~/.dotcfg')
-# d.hello = 'world'
-# d.hello
+# d['hello'] = 'world'
+# d['hello']
 # => "world"
 # d.save
-# d.get = "bent"
+# d['get'] = "bent"
 # d.load
-# d.get
+# d['get']
 # => nil
 #
 class DotCfg
@@ -51,7 +50,7 @@ class DotCfg
     @filename = File.expand_path filename
     @format = format
     @storage = {}
-    File.exists?(@filename) ? self.load : self.reset
+    File.exists?(@filename) ? self.try_load : self.reset
   end
 
   #
@@ -69,18 +68,6 @@ class DotCfg
 
   def delete key
     @storage.delete(self.class.normalize(key))
-  end
-
-  def method_missing key, *args
-    if key[-1,1] == '='
-      self[key[0, key.length - 1]] = args.first
-    else
-      self[key]
-    end
-  end
-
-  def respond_to? key, *args
-    true
   end
 
   #
@@ -112,9 +99,13 @@ class DotCfg
   end
 
   def load
+    File.open(@filename, 'r') { |f| self.deserialize f.read }
+  end
+
+  def try_load
     rescues = 0
     begin
-      File.open(@filename, 'r') { |f| self.deserialize f.read }
+      self.load
     rescue SystemCallError => e
       rescues += 1
       puts  "#{e} (#{e.class})"
