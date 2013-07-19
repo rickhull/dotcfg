@@ -4,11 +4,17 @@ require 'yaml'
 # uses JSON or YAML for serialization
 # top-level structure is object/hash/dict
 #
+# provide and prefer method-based access to str/sym/etc keys
+# e.g.
+# d = DotCfg.new('~/.dotcfg')
+# d.hello = 'world'
+# d.save
+#
 class DotCfg
   def self.normalize key
     case key
     when Numeric, Symbol
-      # do nothing
+      key
     when String
       # leading numerics are invalid
       raise "invalid key: #{key}" if key[0,1] == '0' or key[0,1].to_i != 0
@@ -43,15 +49,16 @@ class DotCfg
   end
 
   def [] key
-    @storage[self.class.normalize key]
+    key = self.class.normalize key
+    @storage[key] or @storage[key.to_s]
   end
 
   def []= key, value
-    @storage[self.class.normalize key] = value
+    @storage[self.class.normalize(key)] = value
   end
 
   def delete key
-    @storage.delete(self.class.normalize key)
+    @storage.delete(self.class.normalize(key))
   end
 
   def method_missing key, *args
@@ -67,11 +74,15 @@ class DotCfg
   end
 
   def serialize
+    raise "invalid storage" unless @storage.is_a? Hash
     self.class::PROCS.fetch(@format)[:to].call @storage
   end
 
   def deserialize junk
-    @storage = self.class::PROCS.fetch(@format)[:from].call junk
+    data = self.class::PROCS.fetch(@format)[:from].call junk
+    raise "invalid junk: #{junk} (#{junk.class})" unless data.is_a? Hash
+    data.each { |k, v| self[k] = v }
+    @storage
   end
 
   def dump
