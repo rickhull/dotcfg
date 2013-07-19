@@ -1,0 +1,6 @@
+pkg/*
+
+# emacs temp and backup files
+*~
+\#*#
+.#*
