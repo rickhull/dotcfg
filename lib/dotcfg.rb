@@ -114,7 +114,7 @@ class DotCfg
         reset
         retry
       end
-      puts "load failed!"
+      puts "try_load failed!"
       raise e
     end
   end
