@@ -23,7 +23,9 @@ puts CFG.pretty
 #   "hello": "world"
 # }
 
-# write to ~/.example
-CFG.save
-```
+CFG.serialize
+# => "{\"hello\":\"world\"}"
 
+CFG.save
+# write to ~/.example
+```
