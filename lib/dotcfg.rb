@@ -29,8 +29,6 @@ class DotCfg
     end
   end
 
-  DEFAULT = {}
-
   PROCS = {
     json: {
       to: proc { |data| data.to_json },
@@ -44,30 +42,34 @@ class DotCfg
     },
   }
 
-  attr_reader :filename, :format, :storage
+  attr_reader :filename, :format
 
   def initialize filename, format = :json
     @filename = File.expand_path filename
     @format = format
-    @storage = {}
+    @cfg = Hash.new
     File.exists?(@filename) ? self.try_load : self.reset
   end
 
   #
-  # @storage manipulation
+  # @cfg manipulation
   #
 
   def [] key
     key = self.class.normalize key
-    @storage[key] or @storage[key.to_s]
+    @cfg[key] or @cfg[key.to_s]
   end
 
   def []= key, value
-    @storage[self.class.normalize(key)] = value
+    @cfg[self.class.normalize(key)] = value
   end
 
   def delete key
-    @storage.delete(self.class.normalize(key))
+    @cfg.delete(self.class.normalize(key))
+  end
+
+  def to_h
+    @cfg
   end
 
   #
@@ -75,8 +77,8 @@ class DotCfg
   #
 
   def serialize
-    raise "invalid storage" unless @storage.is_a? Hash
-    self.class::PROCS.fetch(@format)[:to].call @storage
+    raise "invalid storage" unless @cfg.is_a? Hash
+    self.class::PROCS.fetch(@format)[:to].call @cfg
   end
 
   def deserialize junk
@@ -85,11 +87,11 @@ class DotCfg
       raise ArgumentError, "invalid junk: #{junk} (#{junk.class})"
     end
     data.each { |k, v| self[k] = v }
-    @storage
+    @cfg
   end
 
-  def dump
-    self.class::PROCS.fetch(@format)[:pretty].call @storage
+  def pretty
+    self.class::PROCS.fetch(@format)[:pretty].call @cfg
   end
 
   #
@@ -122,7 +124,7 @@ class DotCfg
   end
 
   def reset
-    @storage = DEFAULT.dup
+    @cfg = Hash.new
     self.save
   end
 end
