@@ -34,7 +34,7 @@ class DotCfg
   PROCS = {
     json: {
       to: proc { |data| data.to_json },
-      from: proc { |json| YAML.load json },
+      from: proc { |json| JSON.parse json }, # YAML.load json },
       pretty: proc { |data| JSON.pretty_generate data },
     },
     yaml: {
@@ -81,7 +81,9 @@ class DotCfg
 
   def deserialize junk
     data = self.class::PROCS.fetch(@format)[:from].call junk
-    raise "invalid junk: #{junk} (#{junk.class})" unless data.is_a? Hash
+    unless data.is_a? Hash
+      raise ArgumentError, "invalid junk: #{junk} (#{junk.class})"
+    end
     data.each { |k, v| self[k] = v }
     @storage
   end
@@ -106,12 +108,12 @@ class DotCfg
     rescues = 0
     begin
       self.load
-    rescue SystemCallError => e
+    rescue SystemCallError, ArgumentError, JSON::ParserError => e
       rescues += 1
       puts  "#{e} (#{e.class})"
       if rescues < 2
         puts "Resetting #{@filename}"
-        reset
+        self.reset
         retry
       end
       puts "try_load failed!"
@@ -121,6 +123,6 @@ class DotCfg
 
   def reset
     @storage = DEFAULT.dup
-    save
+    self.save
   end
 end
