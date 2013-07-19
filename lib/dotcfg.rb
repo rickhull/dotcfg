@@ -23,7 +23,7 @@ class DotCfg
     when String
       # leading numerics are invalid
       raise "invalid key: #{key}" if key[0,1] == '0' or key[0,1].to_i != 0
-      key.downcase.gsub(/\W/, '_').to_sym
+      key.downcase.gsub(/[\W_]+/, '_').gsub(/_\z/, '').to_sym
     else
       raise "invalid key: #{key} (#{key.class})"
     end
