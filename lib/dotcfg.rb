@@ -67,15 +67,15 @@ class DotCfg
   end
 
   def serialize
-    self.class::PROCS[@format][:to].call @storage
+    self.class::PROCS.fetch(@format)[:to].call @storage
   end
 
   def deserialize junk
-    @storage = self.class::PROCS[@format][:from].call junk
+    @storage = self.class::PROCS.fetch(@format)[:from].call junk
   end
 
   def dump
-    self.class::PROCS[@format][:pretty].call @storage
+    self.class::PROCS.fetch(@format)[:pretty].call @storage
   end
 
   def save
