@@ -68,6 +68,7 @@ class DotCfg
     @cfg.delete(self.class.normalize(key))
   end
 
+  # if you need to call this, you might be Doing It Wrong (tm)
   def to_h
     @cfg
   end
