@@ -61,11 +61,11 @@ class DotCfg
   end
 
   def []= key, value
-    @cfg[self.class.normalize(key)] = value
+    @cfg[self.class.normalize key] = value
   end
 
   def delete key
-    @cfg.delete(self.class.normalize(key))
+    @cfg.delete self.class.normalize key
   end
 
   # if you need to call this, you might be Doing It Wrong (tm)
