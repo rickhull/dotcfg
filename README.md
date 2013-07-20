@@ -3,7 +3,7 @@ dotcfg
 dotcfg is a simple, intuitive way for your app to store configuration data on the filesystem -- ideally within the user's home directory, presumably in a dotfile.  If your config data can be represented by a Hash, then dotcfg can easily serialize and persist that data between runs.
 
 ### Serialization Formats
-dotcfg currently understands [JSON](http://json.org) and [YAML](http://yaml.org), defaulting to JSON.
+dotcfg currently understands [JSON](http://json.org) and [YAML](http://yaml.org), defaulting to YAML.
 
 Installation
 ------------
@@ -33,32 +33,32 @@ CFG[:hello]
 # => "world"
 
 puts CFG.pretty
+# ---
+# hello: world
+
+CFG.serialize
+# => "---\nhello: world\n"
+
+CFG.save
+# write to ~/.example
+```
+
+Use JSON
+```ruby
+require 'dotcfg'
+
+# if file exists, read and load it; otherwise initialize the file
+CFG = DotCfg.new '~/.example', :json
+
+# ...
+
+puts CFG.pretty
 # {
 #   "hello": "world"
 # }
 
 CFG.serialize
 # => "{\"hello\":\"world\"}"
-
-CFG.save
-# write to ~/.example
-```
-
-Use YAML
-```ruby
-require 'dotcfg'
-
-# if file exists, read and load it; otherwise initialize the file
-CFG = DotCfg.new '~/.example', :yaml
-
-# ...
-
-puts CFG.pretty
-# ---
-# hello: world
-
-CFG.serialize
-# => "---\nhello: world\n"
 
 # ...
 ```
