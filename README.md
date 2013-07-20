@@ -1,9 +1,21 @@
 dotcfg
 ======
-dotcfg is a simple, intuitive way for your app to store configuration data on the filesystem -- ideally within the user's home directory, presumably in a dotfile.  If your config data can be represented by a Hash, then dotcfg can easily persist that data between runs.
+dotcfg is a simple, intuitive way for your app to store configuration data on the filesystem -- ideally within the user's home directory, presumably in a dotfile.  If your config data can be represented by a Hash, then dotcfg can easily serialize and persist that data between runs.
 
-### Formats
-dotcfg currently understands JSON and YAML, defaulting to JSON.
+### Serialization Formats
+dotcfg currently understands [JSON](http://json.org) and [YAML](http://yaml.org), defaulting to JSON.
+
+Installation
+------------
+Install the gem:
+```
+$ gem install dotcfg         # sudo as necessary
+```
+
+Or, if using [Bundler](http://bundler.io/), add to your Gemfile:
+```ruby
+gem 'dotcfg', '~> 0.1'
+```
 
 Usage
 -----
@@ -49,18 +61,6 @@ CFG.serialize
 # => "---\nhello: world\n"
 
 # ...
-```
-
-Installation
-------------
-Install the gem:
-```
-$ gem install dotcfg         # sudo as necessary
-```
-
-Or, if using Bundler, add to your Gemfile:
-```ruby
-gem 'dotcfg', '~> 0.1'
 ```
 
 Details
