@@ -67,7 +67,7 @@ Details
 -------
 ### Symbols and Strings
 
-When JSON consumes symbols, it emits strings. So if you want to use JSON, use strings rather than symbols for your config items.
+When JSON consumes symbols, it emits strings. So if you want to use JSON, use strings rather than symbols for your config items.  YAML cycles strings and symbols independently, so stick to one or the other.
 
 ### The Simplest Thing That Could Possibly Work
 ```ruby
