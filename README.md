@@ -20,7 +20,6 @@ CFG[:hello]
 # => "world"
 
 puts CFG.pretty
-
 # {
 #   "hello": "world"
 # }
@@ -42,7 +41,6 @@ CFG = DotCfg.new '~/.example', :yaml
 # ...
 
 puts CFG.pretty
-
 # ---
 # hello: world
 
