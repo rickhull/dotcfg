@@ -7,7 +7,7 @@ require 'yaml'
 # e.g.
 # d = DotCfg.new('~/.dotcfg')
 # d['hello'] = 'world'
-# d['hello']
+# d[:hello]
 # => "world"
 # d.save
 # d['get'] = "bent"
@@ -18,12 +18,10 @@ require 'yaml'
 class DotCfg
   def self.normalize key
     case key
-    when Numeric, Symbol
-      key                # pass thru
-    when String
-      # leading numerics are invalid
-      raise "invalid key: #{key}" if key[0,1] == '0' or key[0,1].to_i != 0
-      key.downcase.gsub(/[\W_]+/, '_').gsub(/_\z/, '').to_sym
+    when Numeric
+      key.to_s
+    when String, Symbol
+      key.to_s.downcase.gsub(/[\W_]+/, '_').gsub(/_\z/, '')
     else
       raise "invalid key: #{key} (#{key.class})"
     end
