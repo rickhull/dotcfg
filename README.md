@@ -54,7 +54,7 @@ Installation
 ------------
 Install the gem:
 ```
-$ gem install dotcfg # sudo as necessary
+$ gem install dotcfg         # sudo as necessary
 ```
 
 Or, if using Bundler, add to your Gemfile:
