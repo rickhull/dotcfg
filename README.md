@@ -65,7 +65,11 @@ CFG.serialize
 
 Details
 -------
-The Simplest Thing That Could Possibly Work
+### Symbols and Strings
+
+When JSON consumes symbols, it emits strings. So if you want to use JSON, use strings rather than symbols for your config items.
+
+### The Simplest Thing That Could Possibly Work
 ```ruby
 PROCS = {
   json: {
