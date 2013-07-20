@@ -16,17 +16,6 @@ require 'yaml'
 # => nil
 #
 class DotCfg
-  def self.normalize key
-    case key
-    when Numeric
-      key.to_s
-    when String, Symbol
-      key.to_s.downcase.gsub(/[\W_]+/, '_').gsub(/_\z/, '')
-    else
-      raise "invalid key: #{key} (#{key.class})"
-    end
-  end
-
   PROCS = {
     json: {
       to: proc { |data| data.to_json },
@@ -42,7 +31,7 @@ class DotCfg
 
   attr_reader :filename, :format
 
-  def initialize filename, format = :json
+  def initialize filename, format = :yaml
     @filename = File.expand_path filename
     @format = format
     @cfg = Hash.new
@@ -54,16 +43,15 @@ class DotCfg
   #
 
   def [] key
-    key = self.class.normalize key
-    @cfg[key] or @cfg[key.to_s]
+    @cfg[key]
   end
 
   def []= key, value
-    @cfg[self.class.normalize key] = value
+    @cfg[key] = value
   end
 
   def delete key
-    @cfg.delete self.class.normalize key
+    @cfg.delete key
   end
 
   # if you need to call this, you might be Doing It Wrong (tm)
