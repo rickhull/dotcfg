@@ -50,8 +50,21 @@ CFG.serialize
 # ...
 ```
 
+Installation
+------------
+Install the gem:
+```
+$ gem install dotcfg # sudo as necessary
+```
+
+Or, if using Bundler, add to your Gemfile:
+```ruby
+gem 'dotcfg', '~> 0.1'
+```
+
+Details
+-------
 The Simplest Thing That Could Possibly Work
--------------------------------------------
 ```ruby
 PROCS = {
   json: {
