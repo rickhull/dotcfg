@@ -80,6 +80,5 @@ PROCS = {
 }
 ```
 
-Suggestions For Success
------------------------
+### Suggestions For Success
 Use this in apps, not libraries.  `require 'dotcfg'` should only show up in bin/ files and never those of lib/
