@@ -80,6 +80,3 @@ PROCS = {
   },
 }
 ```
-
-### Suggestions For Success
-Use this in apps, not libraries.  `require 'dotcfg'` should only show up in bin/ files and never those of lib/.  Not that anything expensive is done at requiretime -- the config file is only read upon DotCfg instantiation.
