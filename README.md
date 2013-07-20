@@ -29,7 +29,7 @@ CFG[:does_not_exist]
 # => nil
 
 CFG['hello'] = 'world'
-CFG[:hello]
+CFG['hello']
 # => "world"
 
 puts CFG.pretty
