@@ -49,3 +49,24 @@ CFG.serialize
 
 # ...
 ```
+
+The Simplest Thing That Could Possibly Work
+-------------------------------------------
+```ruby
+PROCS = {
+  json: {
+    to: proc { |data| data.to_json },
+    from: proc { |json| JSON.parse json },
+    pretty: proc { |data| JSON.pretty_generate data },
+  },
+  yaml: {
+    to: proc { |data| data.to_yaml },
+    from: proc { |yaml| YAML.load yaml },
+    pretty: proc { |data| data.to_yaml },
+  },
+}
+```
+
+Suggestions For Success
+-----------------------
+Use this in apps, not libraries.  `require 'dotcfg'` should only show up in bin/ files and never those of lib/
