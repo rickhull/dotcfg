@@ -7,13 +7,12 @@ require 'yaml'
 # e.g.
 # d = DotCfg.new('~/.dotcfg')
 # d['hello'] = 'world'
-# d[:hello]
-# => "world"
+# d['hello'] # => "world"
+# d[:hello]  # => nil
 # d.save
 # d['get'] = "bent"
 # d.load
-# d['get']
-# => nil
+# d['get'] # => nil
 #
 class DotCfg
   PROCS = {
