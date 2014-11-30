@@ -2,6 +2,7 @@ require 'buildar'
 require 'rake/testtask'
 
 Buildar.new do |b|
-  b.use_git = true
+  b.gemspec_file = 'dotcfg.gemspec'
   b.version_file = 'VERSION'
+  b.use_git = true
 end
