@@ -5,7 +5,6 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/rickhull/dotcfg'
   s.license = 'MIT'
   s.description = 'JSON and YAML config serialization and persistence'
-  s.files = %w{Rakefile lib/dotcfg.rb}
   s.add_runtime_dependency 'json', '~> 1'
   s.add_development_dependency 'buildar', '~> 2'
 
@@ -13,4 +12,12 @@ Gem::Specification.new do |s|
   this_dir = File.expand_path('..', __FILE__)
   version_file = File.join(this_dir, 'VERSION')
   s.version  = File.read(version_file).chomp
+
+  s.files = %w[
+    dotcfg.gemspec
+    VERSION
+    README.md
+    Rakefile
+    lib/dotcfg.rb
+  ]
 end
