@@ -1,3 +1,7 @@
+[![Gem Version](https://badge.fury.io/rb/dotcfg.svg)](http://badge.fury.io/rb/dotcfg)
+[![Code Climate](https://d3s6mut3hikguw.cloudfront.net/github/rickhull/dotcfg/badges/gpa.svg)](https://codeclimate.com/github/rickhull/dotcfg/badges)
+[![Dependency Status](https://gemnasium.com/rickhull/dotcfg.svg)](https://gemnasium.com/rickhull/dotcfg)
+
 dotcfg
 ======
 dotcfg is a simple, intuitive way for your app to store configuration data on the filesystem -- ideally within the user's home directory, presumably in a dotfile.  If your config data can be represented by a Hash, then dotcfg can easily serialize and persist that data between runs.
