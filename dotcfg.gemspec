@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/rickhull/dotcfg'
   s.license = 'MIT'
   s.description = 'JSON and YAML config serialization and persistence'
-  s.add_runtime_dependency 'json', '~> 1'
+  s.add_runtime_dependency 'json', '>= 1'
   s.add_development_dependency 'buildar', '~> 2'
 
   # set version dynamically from version file contents
