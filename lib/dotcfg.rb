@@ -34,7 +34,7 @@ class DotCfg
     @filename = File.expand_path filename
     @format = format
     @cfg = Hash.new
-    File.exists?(@filename) ? self.try_load : self.reset
+    File.exist?(@filename) ? self.try_load : self.reset
   end
 
   #
