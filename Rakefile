@@ -1,3 +1,11 @@
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  t.test_files = FileList['test/**/*.rb']
+end
+
+task default: :test
+
 begin
   require 'buildar'
 
@@ -7,16 +15,5 @@ begin
     b.use_git = true
   end
 rescue LoadError
-  # ok
-end
-
-begin
-  require 'rake/testtask'
-
-  Rake::TestTask.new do |t|
-    t.test_files = FileList['test/**/*.rb']
-  end
-  desc "Run tests"
-rescue Exception => e
-  warn "rake/testtask error: #{e}"
+  warn "buildar tasks unavailable"
 end
