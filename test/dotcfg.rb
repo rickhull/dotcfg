@@ -3,7 +3,11 @@ require 'dotcfg'
 
 describe DotCfg do
   def new_filename
-    Dir::Tmpname.make_tmpname('/tmp/dotcfg', nil)
+    begin
+      Dir::Tmpname.make_tmpname('/tmp/dotcfg', nil)
+    rescue
+      ['/tmp/dotcfg', rand(9**9)].join
+    end
   end
 
   before do
