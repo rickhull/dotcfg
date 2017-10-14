@@ -18,7 +18,7 @@ describe DotCfg do
   describe "new" do
     describe "bad file path" do
       it "must raise" do
-        proc { DotCfg.new('does/not/exist') }.must_raise Exception
+        proc { DotCfg.new('does/not/exist') }.must_raise Errno::ENOENT
       end
     end
 
