@@ -6,5 +6,7 @@ rvm:
   - ruby-head
   - ruby
   - jruby
+  - rubinius-3.86
 install: gem install minitest json
 script: rake
+sudo: required # for rubinius container updates
