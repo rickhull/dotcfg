@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/rickhull/dotcfg.svg)](https://travis-ci.org/rickhull/dotcfg)
+[![CI Status](https://github.com/rickhull/dotcfg/actions/workflows/ci.yaml/badge.svg)](https://github.com/rickhull/dotcfg/actions/workflows/ci.yaml)
 [![Gem Version](https://badge.fury.io/rb/dotcfg.svg)](http://badge.fury.io/rb/dotcfg)
 [![Code Climate](https://codeclimate.com/github/rickhull/dotcfg/badges/gpa.svg)](https://codeclimate.com/github/rickhull/dotcfg/badges)
 
