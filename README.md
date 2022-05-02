@@ -1,8 +1,6 @@
 [![Build Status](https://travis-ci.org/rickhull/dotcfg.svg)](https://travis-ci.org/rickhull/dotcfg)
 [![Gem Version](https://badge.fury.io/rb/dotcfg.svg)](http://badge.fury.io/rb/dotcfg)
 [![Code Climate](https://codeclimate.com/github/rickhull/dotcfg/badges/gpa.svg)](https://codeclimate.com/github/rickhull/dotcfg/badges)
-[![Dependency Status](https://gemnasium.com/rickhull/dotcfg.svg)](https://gemnasium.com/rickhull/dotcfg)
-[![Security Status](https://hakiri.io/github/rickhull/dotcfg/master.svg)](https://hakiri.io/github/rickhull/dotcfg/master)
 
 dotcfg
 ======
@@ -15,7 +13,7 @@ Installation
 ------------
 Install the gem:
 ```
-$ gem install dotcfg         # sudo as necessary
+$ gem install dotcfg
 ```
 
 Or, if using [Bundler](http://bundler.io/), add to your Gemfile:
