@@ -63,11 +63,11 @@ describe DotCfg do
       @dc['goodbye'] = 'cruel world'
     end
 
-    it "must serialize to a string" do
+    it "serializes to a string" do
       expect(@dc.serialize).must_be_kind_of String
     end
 
-    it "must deserialize its serialization" do
+    it "deserializes its serialization" do
       hsh = @dc.deserialize(@dc.serialize)
       expect(hsh).must_be_kind_of Hash
       expect(hsh).must_equal({ 'hello' => 'world', 'goodbye' => 'cruel world' })
@@ -75,14 +75,14 @@ describe DotCfg do
       expect(@dc['goodbye']).must_equal 'cruel world'
     end
 
-    it "must overwrite when deserializing" do
+    it "overwrites when deserializing" do
       str = @dc.serialize
       @dc.delete 'hello'
       @dc.deserialize(str)
       expect(@dc['hello']).must_equal 'world'
     end
 
-    it "must pretty-serialize to a string" do
+    it "responds to pretty with a string" do
       expect(@dc.pretty).must_be_kind_of String
     end
 
