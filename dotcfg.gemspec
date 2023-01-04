@@ -5,13 +5,13 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/rickhull/dotcfg'
   s.license = 'MIT'
   s.description = 'JSON and YAML config serialization and persistence'
-  s.add_runtime_dependency 'json', '>= 1.7.7'
+
+  s.required_ruby_version = '~> 3.0'
+  s.add_runtime_dependency 'json', '~> 2.5'
+  s.add_runtime_dependency 'yaml', '~> 0.1'
   s.add_development_dependency 'buildar', '~> 2'
 
-  # set version dynamically from version file contents
-  this_dir = File.expand_path('..', __FILE__)
-  version_file = File.join(this_dir, 'VERSION')
-  s.version  = File.read(version_file).chomp
+  s.version  = File.read(File.join(__dir__, 'VERSION')).chomp
 
   s.files = %w[
     dotcfg.gemspec
@@ -19,5 +19,6 @@ Gem::Specification.new do |s|
     README.md
     Rakefile
     lib/dotcfg.rb
+    test/dotcfg.rb
   ]
 end

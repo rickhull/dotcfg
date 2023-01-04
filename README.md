@@ -2,27 +2,59 @@
 [![Gem Version](https://badge.fury.io/rb/dotcfg.svg)](http://badge.fury.io/rb/dotcfg)
 [![Code Climate](https://codeclimate.com/github/rickhull/dotcfg/badges/gpa.svg)](https://codeclimate.com/github/rickhull/dotcfg/badges)
 
-dotcfg
-======
+# dotcfg
+
 dotcfg is a simple, intuitive way for your app to store configuration data on the filesystem -- ideally within the user's home directory, presumably in a dotfile.  If your config data can be represented by a Hash, then dotcfg can easily serialize and persist that data between runs.
 
-### Serialization Formats
+## Serialization Formats
 dotcfg currently understands [JSON](http://json.org) and [YAML](http://yaml.org), defaulting to YAML.
 
-Installation
-------------
-Install the gem:
+# Usage
+
+## Install
+
+### `git clone`
+
+Clone the repo, then `cd dotcfg`
+
+Optional, if you use *direnv* and want to use Nix flakes to load a dev env:
+`direnv allow`
+
+From here, use `-I lib` with calls to e.g. `ruby` or `irb` to make dotcfg
+available without having the gem installed. e.g.
+
 ```
-$ gem install dotcfg
+$ irb -Ilib -rdotcfg
+
+irb(main):001:0> CFG = DotCfg.new 'example.cfg'
+=>
+#<DotCfg:0x00007f75d06b83a0
+...
+irb(main):002:0> CFG[:does_not_exist]
+=> nil
+irb(main):003:0> CFG['hello'] = 'world'
+=> "world"
+irb(main):004:0> CFG['hello']
+=> "world"
+irb(main):005:0>
 ```
 
-Or, if using [Bundler](http://bundler.io/), add to your Gemfile:
+### `gem install`
+
+```
+gem install dotcfg
+```
+
+### [Bundler](http://bundler.io/)
+
+Add to your Gemfile:
+
 ```ruby
-gem 'dotcfg', '~> 0.1'
+gem 'dotcfg', '~> 1.0'
 ```
 
-Usage
------
+## Usage
+
 ```ruby
 require 'dotcfg'
 
@@ -67,8 +99,8 @@ CFG.serialize
 # ...
 ```
 
-Details
--------
+## Details
+
 ### Symbols and Strings
 
 When JSON consumes symbols, it emits strings. So if you want to use JSON, use strings rather than symbols for your config items.  YAML cycles strings and symbols independently, so stick to one or the other.
