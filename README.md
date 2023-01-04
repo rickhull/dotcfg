@@ -13,6 +13,12 @@ dotcfg currently understands [JSON](http://json.org) and [YAML](http://yaml.org)
 
 ## Install
 
+3 options:
+
+* `git clone`
+* `gem install`
+* [Bundler](http://bundler.io/) `Gemfile`
+
 ### `git clone`
 
 Clone the repo, then `cd dotcfg`
@@ -45,7 +51,7 @@ irb(main):005:0>
 gem install dotcfg
 ```
 
-### [Bundler](http://bundler.io/)
+### [Bundler](http://bundler.io/) `Gemfile`
 
 Add to your Gemfile:
 
