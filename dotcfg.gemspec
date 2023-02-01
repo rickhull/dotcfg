@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.license = 'MIT'
   s.description = 'JSON and YAML config serialization and persistence'
 
-  s.required_ruby_version = '~> 3.0'
+  s.required_ruby_version = '>= 2'
   s.add_runtime_dependency 'json', '~> 2.5'
   s.add_runtime_dependency 'yaml', '~> 0.1'
   s.add_development_dependency 'buildar', '~> 2'
